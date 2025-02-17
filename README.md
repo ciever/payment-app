@@ -1,4 +1,4 @@
-
+`
 # Payment Application.
 
 ### About 
@@ -109,3 +109,5 @@ Since this is not a production app:
 - Request must all be made through `https`. `http` requests will not be redirected for the purpose of this app.
 - Everytime you run or restart the app, the database will reset all the data because `hibernate` is used by default in `application.properties` which does the job. For real world apps I would use migrations.
 - I didnt have enough time to add OpenAPI documentaion or write integration and unit testing.
+- If I had more time, i would abstract the code further, and focus on improving performance.
+- Currently, when creating a payment via a POST request, the response is only returned after the webhook either succeeds or reaches 5 failed attempts. Theres a 2 second wait time in between retries. Once 5 failures occur, the webhook stops retrying. In a production environment, a non-blocking approach could be more suitable—returning the payment response immediately while processing the webhook asynchronously. The webhook can then retry up to 5 times independently. While Spring Boot provides libraries for non-blocking operations, this challenge uses a synchronous flow for simplicity. But of course it depends on our usecase and business requirements. Its just a nice observation.`
